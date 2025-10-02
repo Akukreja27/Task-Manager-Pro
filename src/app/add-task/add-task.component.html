@@ -1,0 +1,26 @@
+
+<button mat-raised-button color="primary" class="btn" (click)="toggleForm()">
+  {{ showForm ? 'Cancel' : 'Add Task' }}
+</button>
+
+
+<form *ngIf="showForm" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" class="task-form">
+  <mat-form-field>
+    <input matInput placeholder="Title" name="title" ngModel required minlength="3">
+  </mat-form-field>
+
+  <mat-form-field>
+    <textarea matInput placeholder="Description" name="description" ngModel required></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select name="status" ngModel required>
+      <mat-option value="Pending">Pending</mat-option>
+      <mat-option value="In Progress">In Progress</mat-option>
+      <mat-option value="Completed">Completed</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="accent" type="submit">Save Task</button>
+</form>

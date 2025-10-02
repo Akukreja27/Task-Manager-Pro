@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TasksService } from './task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -6,10 +7,14 @@ import { Component } from '@angular/core';
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.css'
 })
-export class TaskListComponent {
- tasks: any[] = [
-    { title: 'Task 1', description: 'Complete the Angular tutorial' },
-    { title: 'Task 2', description: 'Create Task Manager Pro layout' },
-    { title: 'Task 3', description: 'Integrate Angular Material' }
-  ];
+export class TaskListComponent implements OnInit{
+  tasks: any[] = [];
+
+  constructor(private taskService: TasksService) {}
+
+   ngOnInit() {
+     this.tasks = this.taskService.getTasks();
+   }
+   
+   
 }
