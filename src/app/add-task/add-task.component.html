@@ -5,21 +5,33 @@
 
 
 <form *ngIf="showForm" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" class="task-form">
-  <mat-form-field>
-    <input matInput placeholder="Title" name="title" ngModel required minlength="3">
+ <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput name="title" ngModel #titleModel="ngModel" required minlength="3">
+    <mat-error *ngIf="titleModel.invalid && (titleModel.dirty || titleModel.touched)">
+        <span *ngIf="titleModel.errors?.['required']">Title is required</span>
+        <span *ngIf="titleModel.errors?.['minlength']">Title must be at least 3 characters</span>
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
-    <textarea matInput placeholder="Description" name="description" ngModel required></textarea>
+  <mat-form-field appearance="fill">
+    <mat-label>Description</mat-label>
+    <textarea matInput name="description" ngModel #descModel="ngModel" required></textarea>
+    <mat-error *ngIf="descModel.invalid && (descModel.dirty || descModel.touched)">
+      Description is required
+    </mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field appearance="fill">
     <mat-label>Status</mat-label>
-    <mat-select name="status" ngModel required>
+    <mat-select name="status" ngModel #statusModel="ngModel" required>
       <mat-option value="Pending">Pending</mat-option>
       <mat-option value="In Progress">In Progress</mat-option>
       <mat-option value="Completed">Completed</mat-option>
     </mat-select>
+    <mat-error *ngIf="statusModel.invalid && (statusModel.dirty || statusModel.touched)">
+      Status is required
+    </mat-error>
   </mat-form-field>
 
   <button mat-raised-button color="accent" type="submit">Save Task</button>
