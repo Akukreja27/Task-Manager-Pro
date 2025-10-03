@@ -1,20 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { TasksService } from './task.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-task-list',
-  standalone: false,
+  standalone:false,
   templateUrl: './task-list.component.html',
-  styleUrl: './task-list.component.css'
+  styleUrls: ['./task-list.component.css']
 })
-export class TaskListComponent implements OnInit{
+export class TaskListComponent implements OnInit {
   tasks: any[] = [];
+  isLoading = true;
+  errorMessage = '';
 
-  constructor(private taskService: TasksService) {}
+  constructor(private http: HttpClient) {}
 
-   ngOnInit() {
-     this.tasks = this.taskService.getTasks();
-   }
-   
-   
+  ngOnInit(): void {
+    this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos?_limit=10')
+      .subscribe({
+        next: (data) => {
+          this.tasks = data;
+          this.isLoading = false;
+        },
+        error: () => {
+          this.errorMessage = 'Failed to fetch tasks!';
+          this.isLoading = false;
+        }
+      });
+  }
 }

@@ -1,0 +1,10 @@
+<div *ngIf="isLoading">Loading task details...</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<mat-card *ngIf="task">
+  <mat-card-title>{{ task.title }}</mat-card-title>
+  <mat-card-content>
+    <p>Task ID: {{ task.id }}</p>
+    <p>Status: {{ task.completed ? 'Completed' : 'Pending' }}</p>
+  </mat-card-content>
+</mat-card>

@@ -15,3 +15,11 @@
 .task-card {
   width: 30%;
 }
+
+button {
+  align-self: flex-start; 
+}
+
+.btn{
+    margin: 15px;
+}

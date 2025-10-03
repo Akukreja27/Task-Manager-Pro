@@ -13,6 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     HeaderComponent,
     FooterComponent,
     TaskListComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    TaskDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +35,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    HttpClientModule
   ],
   providers: [
     provideClientHydration(withEventReplay())

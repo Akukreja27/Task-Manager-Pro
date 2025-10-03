@@ -1,10 +1,4 @@
-
-<button mat-raised-button color="primary" class="btn" (click)="toggleForm()">
-  {{ showForm ? 'Cancel' : 'Add Task' }}
-</button>
-
-
-<form *ngIf="showForm" #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" class="task-form">
+<form #taskForm="ngForm" (ngSubmit)="onSubmit(taskForm)" class="task-form">
  <mat-form-field appearance="fill">
     <mat-label>Title</mat-label>
     <input matInput name="title" ngModel #titleModel="ngModel" required minlength="3">

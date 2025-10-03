@@ -9,19 +9,15 @@ import { TasksService } from '../task-list/task.service';
   styleUrls: ['./add-task.component.css']
 })
 export class AddTaskComponent {
-  showForm = false;  
+ 
 
   constructor(private taskService: TasksService) {}
-
-  toggleForm() {
-    this.showForm = !this.showForm;
-  }
 
   onSubmit(form: NgForm) {
     if (form.valid) {
       this.taskService.addTask(form.value);
-      form.reset();
-      this.showForm = false; 
+      alert('Task saved successfully!');
+      form.reset(); 
     }
   }
 }

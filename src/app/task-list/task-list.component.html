@@ -1,6 +1,9 @@
 <div class="task-list-wrapper">
 <div class="task-container">
-  <mat-card *ngFor="let task of tasks" class="task-card">
+  <button mat-raised-button color="primary" class="btn" [routerLink]="'/add-task'">
+  {{ 'Add Task' }}
+  </button>
+  <mat-card *ngFor="let task of tasks" class="task-card" [routerLink]="['/tasks', task.id]">
     <mat-card-header>
       <mat-card-title>{{ task.title }}</mat-card-title>
     </mat-card-header>
