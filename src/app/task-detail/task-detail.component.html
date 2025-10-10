@@ -1,10 +1,9 @@
-<div *ngIf="isLoading">Loading task details...</div>
-<div *ngIf="errorMessage">{{ errorMessage }}</div>
-
-<mat-card *ngIf="task">
+<mat-card *ngIf="task" class="task-detail-card">
   <mat-card-title>{{ task.title }}</mat-card-title>
   <mat-card-content>
-    <p>Task ID: {{ task.id }}</p>
-    <p>Status: {{ task.completed ? 'Completed' : 'Pending' }}</p>
+    <p><strong>ID:</strong> {{ task.id }}</p>
+    <p><strong>Status:</strong> {{ task.completed ? 'Completed' : 'Pending' }}</p>
+    <p><strong>Description:</strong> Task description for "{{ task.title }}"</p>
   </mat-card-content>
+  <button mat-raised-button color="primary" routerLink="/tasks">Back</button>
 </mat-card>

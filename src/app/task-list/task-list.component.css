@@ -7,19 +7,27 @@
 }
 
 .task-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;  
+  padding: 20px;
 }
 
-.task-card {
-  width: 30%;
+.btn {
+  margin-bottom: 20px;
 }
 
-button {
-  align-self: flex-start; 
+.search-bar {
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-.btn{
-    margin: 15px;
+table {
+  width: 100%;
+}
+
+.error {
+  color: red;
+  margin-top: 10px;
+}
+
+mat-paginator {
+  margin-top: 10px;
 }

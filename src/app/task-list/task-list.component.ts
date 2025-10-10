@@ -1,30 +1,47 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { TaskService } from '../../services/task-service';
 
 @Component({
   selector: 'app-task-list',
-  standalone:false,
+  standalone: false,
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
 export class TaskListComponent implements OnInit {
-  tasks: any[] = [];
+  displayedColumns: string[] = ['id', 'title', 'completed', 'actions'];
+  dataSource = new MatTableDataSource<any>([]);
   isLoading = true;
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
-  ngOnInit(): void {
-    this.http.get<any[]>('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      .subscribe({
-        next: (data) => {
-          this.tasks = data;
-          this.isLoading = false;
-        },
-        error: () => {
-          this.errorMessage = 'Failed to fetch tasks!';
-          this.isLoading = false;
-        }
-      });
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit() {
+    this.loadTasks();
+  }
+
+  loadTasks() {
+    this.taskService.getTasks().subscribe({
+      next: (data) => {
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.errorMessage = err.message;
+        this.isLoading = false;
+      }
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }
